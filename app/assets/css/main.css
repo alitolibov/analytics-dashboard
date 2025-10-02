@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    @apply bg-white;
+}
+
+html.dark {
+    @apply bg-[#0b0d28];
+}
+
+.p-button {
+    @apply text-white py-2 px-4 text-sm md:text-base
+}
+
+.p-inputtext {
+    @apply py-2 px-4 text-sm dark:text-white md:text-base
+}
+
+.p-select-label {
+    @apply py-2 px-4 text-sm dark:text-white md:text-base
+}
+
+.p-select-option {
+    @apply py-2 px-4 text-sm dark:text-white md:text-base
+}
+
+.p-select-option-selected {
+    @apply bg-primary-500 text-white
+}
