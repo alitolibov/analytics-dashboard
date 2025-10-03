@@ -4,10 +4,10 @@ import Aura from '@primeuix/themes/aura';
 export default defineNuxtConfig({
     devtools: {enabled: true},
     modules: [
-      '@primevue/nuxt-module',
-      '@pinia/nuxt',
-      '@nuxtjs/tailwindcss',
-      '@nuxtjs/color-mode'
+        '@primevue/nuxt-module',
+        '@pinia/nuxt',
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/color-mode'
     ],
     css: [
         '@/assets/css/main.css',

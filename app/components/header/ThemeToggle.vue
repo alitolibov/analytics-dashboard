@@ -18,12 +18,14 @@ const toggleTheme = () => {
 </script>
 
 <template>
-  <button class="theme-btn" @click="toggleTheme">
-    <transition name="fade" mode="out-in">
-      <IconMoon v-if="!isDark" key="moon" class="icon" />
-      <IconSun v-else key="sun" class="icon" />
-    </transition>
-  </button>
+  <client-only>
+    <button class="theme-btn" @click="toggleTheme">
+      <transition name="fade" mode="out-in">
+        <IconSun v-if="isDark" key="sun" class="icon" />
+        <IconMoon v-else key="moon" class="icon" />
+      </transition>
+    </button>
+  </client-only>
 </template>
 
 <style scoped>

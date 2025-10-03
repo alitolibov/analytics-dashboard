@@ -5,6 +5,7 @@ export default {
         extend: {
             colors: {
                 primary: {
+                    200: "#1A1D3C",
                     300: "#293397",
                     400: "#1f2773",
                     500: "#161b50",
@@ -19,6 +20,15 @@ export default {
                 success: "#10b981",
                 warning: "#f59e0b",
                 danger: "#ef4444"
+            },
+        },
+        container: {
+            center: true,
+            padding: "16px",
+            screens: {
+                sm: "600px",
+                md: "768px",
+                lg: "1200px",
             },
         },
     },
