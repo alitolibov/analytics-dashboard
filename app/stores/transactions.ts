@@ -18,9 +18,7 @@ export const useTransactions = defineStore("transactions", () => {
     async function fetchTransactions() {
         isLoading.value = true;
         try {
-            const data = await $fetch<ITransaction[]>("/api/transactions");
-            console.log(data);
-            transactions.value = data;
+            transactions.value = await $fetch<ITransaction[]>("/api/transactions");
         } catch (err) {
             console.error(err);
         } finally {
@@ -50,6 +48,7 @@ export const useTransactions = defineStore("transactions", () => {
     return {
         isLoading,
         selectedFilter,
+        customRange,
         filteredTransactions,
         fetchTransactions
     }

@@ -35,3 +35,7 @@ html.dark {
 .p-select-option-selected {
     @apply bg-primary-500 text-white
 }
+
+.p-dialog-title {
+    @apply text-lg
+}

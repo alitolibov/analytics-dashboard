@@ -16,6 +16,8 @@
 
     --p-button-primary-active-color: #ffffff;
     --p-button-primary-hover-color: #ffffff;
+    --p-button-secondary-focus-ring-color: transparent;
+    --p-button-secondary-background: #6b7280;
 
     --p-success-color: #10b981;
     --p-warning-color: #f59e0b;
@@ -28,6 +30,12 @@
     --p-select-option-selected-focus-background: #1d4ed8;
     --p-select-option-selected-color: #ffffff;
     --p-select-option-selected-focus-color: #ffffff;
+
+    --p-dialog-background: #ffffff;
+
+    --p-datepicker-date-range-selected-background: #293397;
+    --p-datepicker-date-range-selected-color: #fff;
+
 }
 
 /* Тёмная тема */
@@ -48,6 +56,9 @@
 
     --p-button-primary-hover-color: #ffffff;
     --p-button-primary-active-color: #ffffff;
+    --p-button-text-secondary-hover-background: #1e293b;
+    --p-button-secondary-focus-ring-color: transparent;
+    --p-button-secondary-background: #1e293b;
 
     --p-success-color: #34d399;
     --p-warning-color: #fbbf24;
@@ -66,4 +77,22 @@
     --p-select-option-selected-color: #ffffff;
     --p-select-option-selected-focus-color: #ffffff;
     --p-select-option-focus-color: #ffffff;
+
+    --p-dialog-background: #0f172a;
+    --p-dialog-border-color: #1A1D3C;
+
+    --p-datepicker-panel-background: #0f172a;
+    --p-datepicker-header-background: #0f172a;
+    --p-datepicker-header-border-color: #9ca3af;
+    --p-datepicker-panel-border-color: #9ca3af;
+    --p-datepicker-today-background: #293397;
+    --p-datepicker-today-color: #fff;
+    --p-datepicker-date-selected-color: #fff;
+    --p-datepicker-date-hover-background: #334155;
+    --p-datepicker-date-hover-color: #fff;
+    --p-datepicker-date-range-selected-background: #293397;
+    --p-datepicker-select-month-hover-background: #334155;
+    --p-datepicker-select-month-hover-color: #fff;
+    --p-datepicker-select-year-hover-background: #334155;
+    --p-datepicker-select-year-hover-color: #fff;
 }

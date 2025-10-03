@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import MetricsCard from "~/components/common/MetricsCard.vue";
-import { useTransactions } from "~/stores/transactions";
+import {useTransactions} from "~/stores/transactions";
+import {filterOptions} from "~/constants";
+import SelectRangeModal from "~/components/modals/SelectRangeModal.vue";
+import {formatRange} from "~/utils/formatter";
 
+const showSelectModal = ref(false)
 const transactionStore = useTransactions()
 
 const totalIncome = computed(() =>
@@ -25,10 +29,11 @@ const highestIncome = computed(() => {
 
   return Object.entries(categoryMap).reduce(
       (max, [category, amount]) =>
-          amount > max.amount ? { category, amount } : max,
-      { category: "", amount: 0 }
+          amount > max.amount ? {category, amount} : max,
+      {category: "", amount: 0}
   ).category;
 });
+
 
 onMounted(async () => {
   await transactionStore.fetchTransactions()
@@ -36,7 +41,24 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div class="space-y-4">
+    <Select :options="filterOptions"
+            v-model="transactionStore.selectedFilter"
+            @update:model-value="(val) => showSelectModal = val === 'custom'"
+            option-label="label"
+            option-value="value"
+    >
+      <template #value="{ value }">
+        <span v-if="value === 'custom' && transactionStore.customRange">
+          {{
+            transactionStore.customRange.from && transactionStore.customRange.to ? formatRange(transactionStore.customRange) : value
+          }}
+      </span>
+        <span v-else>
+      {{ filterOptions.find(opt => opt.value === value)?.label }}
+    </span>
+      </template>
+    </Select>
     <div class="grid items-stretch grid-cols-2 gap-3 xl:grid-cols-4">
       <template v-if="transactionStore.isLoading">
         <Skeleton
@@ -47,14 +69,17 @@ onMounted(async () => {
             height="144px"
         />
       </template>
-      <template v-else-if="transactionStore.filteredTransactions.length">
-        <MetricsCard label="Всего дохода" :value="totalIncome" currency />
-        <MetricsCard label="Количество заказов" :value="transactionStore.filteredTransactions.length" />
-        <MetricsCard label="Средний чек" :value="averageBill" currency />
-        <MetricsCard label="Наибольший доход" :value="highestIncome"/>
+      <template v-else>
+        <MetricsCard label="Всего дохода" :value="totalIncome" currency/>
+        <MetricsCard label="Количество заказов" :value="transactionStore.filteredTransactions.length"/>
+        <MetricsCard label="Средний чек" :value="averageBill" currency/>
+        <MetricsCard label="Наибольший доход" :value="highestIncome || '-'"/>
       </template>
     </div>
   </div>
+  <teleport to="body">
+    <SelectRangeModal v-model="showSelectModal"/>
+  </teleport>
 </template>
 
 
