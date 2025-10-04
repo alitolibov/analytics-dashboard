@@ -4,6 +4,7 @@ import {useTransactions} from "~/stores/transactions";
 import {filterOptions} from "~/constants";
 import SelectRangeModal from "~/components/modals/SelectRangeModal.vue";
 import {formatRange} from "~/utils/formatter";
+import LineChart from "~/components/charts/LineChart.vue";
 
 const showSelectModal = ref(false)
 const transactionStore = useTransactions()
@@ -33,15 +34,10 @@ const highestIncome = computed(() => {
       {category: "", amount: 0}
   ).category;
 });
-
-
-onMounted(async () => {
-  await transactionStore.fetchTransactions()
-});
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="space-y-5">
     <Select :options="filterOptions"
             v-model="transactionStore.selectedFilter"
             @update:model-value="(val) => showSelectModal = val === 'custom'"
@@ -76,10 +72,14 @@ onMounted(async () => {
         <MetricsCard label="Наибольший доход" :value="highestIncome || '-'"/>
       </template>
     </div>
-  </div>
-  <teleport to="body">
+      <client-only>
+        <LineChart/>
+        <template #placeholder>
+          <p class="text-center mt-10 text-lg">Загрузка графика...</p>
+        </template>
+      </client-only>
     <SelectRangeModal v-model="showSelectModal"/>
-  </teleport>
+  </div>
 </template>
 
 

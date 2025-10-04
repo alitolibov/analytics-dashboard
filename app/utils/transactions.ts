@@ -14,15 +14,18 @@ export const filterMap: Record<FilterKey, () => DateRange> = {
         start: moment().startOf("day"),
         end: moment().endOf("day"),
     }),
+
     week: () => ({
-        start: moment().subtract(1, "week").startOf("week"),
-        end: moment().subtract(1, "week").endOf("week"),
+        start: moment().subtract(6, "days").startOf("day"),
+        end: moment().endOf("day"),
     }),
+
     month: () => ({
-        start: moment().subtract(1, "month").startOf("month"),
-        end: moment().subtract(1, "month").endOf("month"),
+        start: moment().subtract(30, "days").startOf("day"),
+        end: moment().endOf("day"),
     }),
 };
+
 
 export function isFilterKey(value: FilterType): value is FilterKey {
     return value in filterMap;

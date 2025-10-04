@@ -5,9 +5,10 @@ import {useTailwindBreakpoints} from "~/components/composables/breakpoints";
 import {useTransactions} from "~/stores/transactions";
 
 const visible = defineModel<boolean>()
-const date = ref<[Date, Date] | []>();
 const breakpoints = useTailwindBreakpoints()
 const transactionStore = useTransactions()
+
+const date = ref<[Date, Date] | []>();
 
 function close() {
   if (!transactionStore.customRange?.from || !transactionStore.customRange?.to) {
@@ -18,7 +19,7 @@ function close() {
 }
 
 function save() {
-  if(!date.value?.length) return
+  if (!date.value?.length) return
 
   const [from, to] = date.value;
 
@@ -27,9 +28,16 @@ function save() {
     to,
   }
 
-  visible.value = false
+  visible.value = false;
 }
 
+watch(
+    () => transactionStore.customRange,
+    (range) => {
+      date.value = range?.from && range?.to
+          ? [new Date(range.from), new Date(range.to)]
+          : []
+    })
 </script>
 
 <template>

@@ -45,11 +45,20 @@ export const useTransactions = defineStore("transactions", () => {
         );
     });
 
+    onMounted(async () => {
+        await fetchTransactions()
+    });
+
+    watch(selectedFilter, (newVal, oldVal) => {
+        if (oldVal === "custom" && newVal !== "custom") {
+            customRange.value = null
+        }
+    });
+
     return {
         isLoading,
         selectedFilter,
         customRange,
-        filteredTransactions,
-        fetchTransactions
+        filteredTransactions
     }
 })
