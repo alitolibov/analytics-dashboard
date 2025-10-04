@@ -8,13 +8,16 @@ const visible = defineModel<boolean>()
 const breakpoints = useTailwindBreakpoints()
 const transactionStore = useTransactions()
 
-const date = ref<[Date, Date] | []>();
+const date = ref<[Date, Date] | []>([]);
+
+const isDisabled = computed(() => date.value?.length === 2 && date.value.every(Boolean))
 
 function close() {
   if (!transactionStore.customRange?.from || !transactionStore.customRange?.to) {
     transactionStore.selectedFilter = 'all'
   }
 
+  date.value = []
   visible.value = false
 }
 
@@ -53,6 +56,7 @@ watch(
         v-model="date"
         selectionMode="range"
         inline
+        :max-date="new Date()"
         class="w-full"
         prevIcon="pi pi-angle-left"
         nextIcon="pi pi-angle-right"
@@ -60,7 +64,7 @@ watch(
     />
     <div class="flex items-center justify-end gap-4 mt-4">
       <Button label="Отменить" severity="secondary" @click="close"/>
-      <Button label="Применить" @click="save"/>
+      <Button label="Применить" @click="save" :disabled="!isDisabled"/>
     </div>
   </Dialog>
 </template>
